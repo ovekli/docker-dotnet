@@ -1,0 +1,29 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: dotnet
+spec:
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'dotnet:latest'
+  resources: {}
+  successfulBuildsHistoryLimit: 5
+  failedBuildsHistoryLimit: 5
+  strategy:
+    type: Docker
+    dockerStrategy: {}
+  postCommit: {}
+  source:
+    type: Dockerfile
+    dockerfile: |
+      FROM mcr.microsoft.com/dotnet/aspnet:10.0.8-azurelinux3.0-amd64 as runtime
+
+      RUN mkdir /app
+      COPY Release/net10.0 /app/
+      ENTRYPOINT ["/app/SqlDockerApp"]
+  runPolicy: Serial
+status:
+  lastVersion: 6
+
