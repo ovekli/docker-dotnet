@@ -2,7 +2,8 @@
 FROM mcr.microsoft.com/dotnet/sdk:10.0.300-azurelinux3.0-amd64 as builder
 
 ENV DOTNET_APP=SqlDockerApp
-ENV NUGET_REPO=https://nexus-intern.klinghed.se/repository/nuget-dotnet-proxy/index.json
+# ENV NUGET_REPO=https://nexus-intern.klinghed.se/repository/nuget-dotnet-proxy/index.json
+ENV NUGET_REPO=https://nexus-intern.klinghed.se/repository/nuget-dotnet-group/index.json
 
 RUN mkdir -p build && \
 cd /build && \
